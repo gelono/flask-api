@@ -3,8 +3,8 @@ import ssl
 from flask import Flask, request, jsonify
 
 context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-context.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
-                        keyfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
+context.load_cert_chain(certfile=r'C:\wac\crt\vm5043127.43ssd.had.wf-crt.pem',
+                        keyfile=r'C:\wac\crt\vm5043127.43ssd.had.wf-key.pem')
 
 app = Flask(__name__)
 
