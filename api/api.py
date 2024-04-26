@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from OpenSSL import SSL
 
-context = SSL.Context(SSL.TLS1_2_VERSION)
+context = SSL.Context(SSL.TLSv1_2_METHOD)
 context.use_privatekey_file(r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
 context.use_certificate_file(r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem')
 
