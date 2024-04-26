@@ -28,5 +28,5 @@ def hello_world():
 
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.run(host='45.132.105.156', port=5000, ssl_context=(r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
+    app.run(host='https://vm5043127.43ssd.had.wf', port=5000, ssl_context=(r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
                                                            r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem'))
