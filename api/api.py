@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify
+from OpenSSL import SSL
 
+context = SSL.Context(SSL.TLS1_2_VERSION)
+context.use_privatekey_file(r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
+context.use_certificate_file(r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem')
 
 app = Flask(__name__)
 
@@ -28,5 +32,4 @@ def hello_world():
 
 if __name__ == '__main__':
     # app.run(debug=True)
-    app.run(host='vm5043127.43ssd.had.wf', port=5000, ssl_context=(r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
-                                                           r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem'))
+    app.run(host='vm5043127.43ssd.had.wf', port=5000, ssl_context=context)
