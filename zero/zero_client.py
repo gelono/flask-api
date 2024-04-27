@@ -1,20 +1,24 @@
 import zmq
-import ssl
 
+# Открытый/закрытый ключи клиента
+server_public_key = b'jA8U*z0y7M59cxCMtH)L[?ornj><R@MLe)V>T5FX'
 
-context = zmq.Context()
-socket = context.socket(zmq.REQ)  # REQ (REQUEST) socket for sending requests
+client_public_key = b'y&u>jY?+%isnN7hhhoxkezFO^DpV*-kN{DO6z-qy'
+client_secret_key = b'8lmlsf0MIf{Wte-P{<at34rBA:6XCegXv3KQ*A6m'
 
-# Создаем SSL контекст
-ssl_context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-ssl_context.load_verify_locations("vm5043127.43ssd.had.wf-crt.pem")  # Путь к сертификату сервера
+context = zmq.Context.instance()
 
-socket = ssl_context.wrap_socket(socket, server_side=False)  # Оборачиваем сокет в SSL
+# Создаем клиентский сокет и настраиваем безопасность
+client_socket = context.socket(zmq.REQ)
+client_socket.curve_secretkey = client_secret_key
+client_socket.curve_publickey = client_public_key
+client_socket.curve_serverkey = server_public_key
+client_socket.connect("tcp://localhost:5000")
 
-socket.connect("tcp://vm5043127.43ssd.had.wf:5000")
-# socket.connect("tcp://localhost:5000")
+# Отправляем запрос на сервер
+token = b"uaysdgfuqcyk13rkuahcvuy3115135"
+client_socket.send(token)
 
-# socket.send(b"Hello")
-socket.send(b"uaysdgfuqcyk13rkuahcvuy3115135")
-message = socket.recv()
-print(f"Received reply: {message.decode('utf-8')}")
+# Получаем ответ от сервера
+reply = client_socket.recv()
+print(f"Received reply: {reply.decode('utf-8')}")
