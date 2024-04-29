@@ -30,6 +30,7 @@ while True:
     print(IP)
 
     logging.info(f"Received request: {message}")
+    logging.info(f"IP: {IP}")
 
     if check_token(token):
         print("Received request:", message)
