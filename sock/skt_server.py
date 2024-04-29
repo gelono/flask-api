@@ -1,18 +1,7 @@
 import logging
 import socket
 
-
-def check_token(token):
-    with open('../storage/tokens.txt', 'r') as file:
-        tokens = file.read().splitlines()
-        return token in tokens
-
-
-def check_ip(ip):
-    with open('../storage/ips.txt', 'r') as file:
-        ips = file.read().splitlines()
-        return ip in ips
-
+from tools import check_ip, check_token
 
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -30,25 +19,47 @@ server_socket.listen(1)
 
 print("server start...")
 
+# while True:
+#     # Принимаем входящее соединение
+#     client_socket, client_address = server_socket.accept()
+#
+#     logging.info(f"IP: {client_address[0]}")
+#     if check_ip(client_address[0]):
+#         data = client_socket.recv(1024)
+#         if data:
+#             token = data.decode()
+#             logging.info(f"token: {token}")
+#             if check_token(token):
+#                 client_socket.sendall(b"token is correct")
+#
+#         client_socket.sendall(b"IP is correct")
+#
+#     else:
+#         client_socket.sendall(b"IP is failed")
+#         client_socket.close()
+#         continue
+#
+#     # Закрываем соединение с клиентом
+#     client_socket.close()
 while True:
-    # Принимаем входящее соединение
     client_socket, client_address = server_socket.accept()
-
     logging.info(f"IP: {client_address[0]}")
+
     if check_ip(client_address[0]):
+        client_socket.sendall(b"IP is correct")
+
         data = client_socket.recv(1024)
         if data:
             token = data.decode()
             logging.info(f"token: {token}")
             if check_token(token):
                 client_socket.sendall(b"token is correct")
-
-        client_socket.sendall(b"IP is correct")
+            else:
+                client_socket.sendall(b"token is incorrect")
+        else:
+            client_socket.sendall(b"No token received")
 
     else:
         client_socket.sendall(b"IP is failed")
-        client_socket.close()
-        continue
 
-    # Закрываем соединение с клиентом
     client_socket.close()
