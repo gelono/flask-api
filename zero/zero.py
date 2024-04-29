@@ -36,10 +36,10 @@
 #     else:
 #         server_socket.send(b"Error token")
 import zmq
-import time
 import sys
 import ssl
 import logging
+import socket
 
 
 def check_token(token):
@@ -68,9 +68,15 @@ context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pe
 
 while True:
     message = socket.recv()
+
+    # Получаем информацию о сокете
+    client_address = socket.getsockopt(zmq.LAST_ENDPOINT)
+    client_ip = client_address.split(":")[1]
+
     token = message.decode('utf-8')
 
     logging.info(f"Received request: {message}")
+    logging.info(f"Received request: {client_ip}")
 
     if check_token(token):
         print("Received request:", message)
