@@ -1,4 +1,3 @@
-import codecs
 import logging
 import socket
 
@@ -7,6 +6,12 @@ def check_token(token):
     with open('../storage/tokens.txt', 'r') as file:
         tokens = file.read().splitlines()
         return token in tokens
+
+
+def check_ip(ip):
+    with open('../storage/ips.txt', 'r') as file:
+        ips = file.read().splitlines()
+        return ip in ips
 
 
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -30,7 +35,7 @@ while True:
     client_socket, client_address = server_socket.accept()
 
     logging.info(f"IP: {client_address[0]}")
-    if client_address[0] == '46.211.226.229':  # Пример проверки IP адреса
+    if check_ip(client_address[0]):
         data = client_socket.recv(1024)
         if data:
             token = data.decode()
@@ -41,7 +46,6 @@ while True:
         client_socket.sendall(b"IP is correct")
 
     else:
-        print("IP is failed")
         client_socket.sendall(b"IP is failed")
         client_socket.close()
         continue
