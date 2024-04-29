@@ -29,17 +29,23 @@ while True:
     # Проверяем IP адрес клиента
     # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
     if client_address[0] == '127.0.0.1':  # Пример проверки IP адреса
+        print('4')
         print("Клиент с разрешенным IP адресом подключен.")
     else:
+        print('5')
         print("Клиент с неразрешенным IP адресом подключен. Закрываем соединение.")
         client_socket.close()
         continue
 
     # Принимаем данные от клиента и отправляем ответ
     data = client_socket.recv(1024)
+    print('6')
     if data:
+        print('7')
         print("Получено от клиента:", data.decode())
         client_socket.sendall(b"Msg recived")
+        print('8')
 
     # Закрываем соединение с клиентом
     client_socket.close()
+    print('9')
