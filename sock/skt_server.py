@@ -1,3 +1,4 @@
+import codecs
 import socket
 
 # Создаем сокет
@@ -19,10 +20,12 @@ while True:
     client_socket, client_address = server_socket.accept()
 
     # Выводим информацию о клиенте
-    print("Подключение от клиента:", client_address)
+    # print("Подключение от клиента:", client_address)
+    print(codecs.encode(client_address, 'utf-8').decode())
 
     # Проверяем IP адрес клиента
-    if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
+    # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
+    if client_address[0] == '127.0.0.1':  # Пример проверки IP адреса
         print("Клиент с разрешенным IP адресом подключен.")
     else:
         print("Клиент с неразрешенным IP адресом подключен. Закрываем соединение.")
