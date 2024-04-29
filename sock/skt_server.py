@@ -29,7 +29,7 @@ while True:
     # print(f"Подключение от клиента: {ip_address}:{port_number}"
     # Проверяем IP адрес клиента
     # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
-    if client_address[0] == '46.211.228.217':  # Пример проверки IP адреса
+    if client_address[0] == '46.211.228.139':  # Пример проверки IP адреса
         data = client_socket.recv(1024)
         if data:
             msg_client = data.decode()
