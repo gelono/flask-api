@@ -2,8 +2,14 @@ import codecs
 import logging
 import socket
 
-logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
+def check_token(token):
+    with open('../storage/tokens.txt', 'r') as file:
+        tokens = file.read().splitlines()
+        return token in tokens
+
+
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Создаем сокет
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,29 +28,23 @@ print("server start...")
 while True:
     # Принимаем входящее соединение
     client_socket, client_address = server_socket.accept()
-    # Выводим информацию о клиенте
-    # print("Подключение от клиента:", client_address)
-    print(codecs.encode(client_address[0], 'utf-8').decode())
-    # ip_address, port_number = client_address
-    # print(f"Подключение от клиента: {ip_address}:{port_number}"
-    # Проверяем IP адрес клиента
-    # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
+
     logging.info(f"IP: {client_address[0]}")
     if client_address[0] == '46.211.226.229':  # Пример проверки IP адреса
         data = client_socket.recv(1024)
         if data:
-            msg_client = data.decode()
-            logging.info(f"token: {msg_client}")
+            token = data.decode()
+            logging.info(f"token: {token}")
+            if check_token(token):
+                client_socket.sendall(b"token is correct")
 
         client_socket.sendall(b"IP is correct")
+
     else:
         print("IP is failed")
         client_socket.sendall(b"IP is failed")
         client_socket.close()
         continue
-
-    # Принимаем данные от клиента и отправляем ответ
-
 
     # Закрываем соединение с клиентом
     client_socket.close()
