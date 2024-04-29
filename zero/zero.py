@@ -60,4 +60,4 @@ while True:
     message = socket.recv()
     print("Received request:", message)
     time.sleep(1)
-    socket.send(b"World from %s" % port)
+    socket.send(b"World")
