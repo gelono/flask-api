@@ -10,6 +10,20 @@ def check_token(token):
         return token in tokens
 
 
+def check_ip():
+    sock = skt.socket(skt.AF_INET, skt.SOCK_STREAM)
+    sock.bind(("", 5000))
+    sock.listen(5)
+    try:
+        client, addr = sock.accept()
+        print(client, "\n", addr[0])  # выведет инфо о клиенте
+    except KeyboardInterrupt:
+        print("ERR")
+        sock.close()
+    else:
+        return client
+
+
 # # Инициализация системы логирования
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -26,7 +40,7 @@ socket.bind("tcp://*:%s" % port)
 while True:
     message = socket.recv()
     token = message.decode('utf-8')
-    IP = skt.gethostbyname(skt.gethostname())
+    IP = check_ip()
     print(IP)
 
     logging.info(f"Received request: {message}")
