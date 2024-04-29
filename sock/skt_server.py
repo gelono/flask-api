@@ -19,28 +19,6 @@ server_socket.listen(1)
 
 print("server start...")
 
-# while True:
-#     # Принимаем входящее соединение
-#     client_socket, client_address = server_socket.accept()
-#
-#     logging.info(f"IP: {client_address[0]}")
-#     if check_ip(client_address[0]):
-#         data = client_socket.recv(1024)
-#         if data:
-#             token = data.decode()
-#             logging.info(f"token: {token}")
-#             if check_token(token):
-#                 client_socket.sendall(b"token is correct")
-#
-#         client_socket.sendall(b"IP is correct")
-#
-#     else:
-#         client_socket.sendall(b"IP is failed")
-#         client_socket.close()
-#         continue
-#
-#     # Закрываем соединение с клиентом
-#     client_socket.close()
 while True:
     client_socket, client_address = server_socket.accept()
     logging.info(f"IP: {client_address[0]}")
