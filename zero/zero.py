@@ -39,6 +39,10 @@ import zmq
 import time
 import sys
 import ssl
+import logging
+
+# # Инициализация системы логирования
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 port = "5000"
 if len(sys.argv) > 1:
@@ -58,6 +62,10 @@ context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pe
 while True:
     # Ожидаем следующий запрос от клиента
     message = socket.recv()
+
+    # Запись входящего сообщения в журнал
+    logging.info(f"Received request: {message}")
+
     print("Received request:", message)
     time.sleep(1)
     socket.send(b"World")
