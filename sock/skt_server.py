@@ -31,9 +31,11 @@ while True:
     if client_address[0] == '127.0.0.1':  # Пример проверки IP адреса
         print('4')
         print("IP is correct")
+        client_socket.sendall(b"IP is correct")
     else:
         print('5')
         print("IP is failed")
+        client_socket.sendall(b"IP is failed")
         client_socket.close()
         continue
 
