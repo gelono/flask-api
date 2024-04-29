@@ -21,7 +21,9 @@ while True:
 
     # Выводим информацию о клиенте
     # print("Подключение от клиента:", client_address)
-    print(codecs.encode(client_address, 'utf-8').decode())
+    # print(codecs.encode(client_address, 'utf-8').decode())
+    ip_address, port_number = client_address
+    print(f"Подключение от клиента: {ip_address}:{port_number}")
 
     # Проверяем IP адрес клиента
     # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
