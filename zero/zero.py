@@ -41,6 +41,13 @@ import sys
 import ssl
 import logging
 
+
+def check_token(token):
+    with open('../storage/tokens.txt', 'r') as file:
+        tokens = file.read().splitlines()
+        return token in tokens
+
+
 # # Инициализация системы логирования
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -60,12 +67,11 @@ context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pe
                             keyfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
 
 while True:
-    # Ожидаем следующий запрос от клиента
     message = socket.recv()
-
-    # Запись входящего сообщения в журнал
     logging.info(f"Received request: {message}")
 
-    print("Received request:", message)
-    time.sleep(1)
-    socket.send(b"World")
+    if check_token(message):
+        print("Received request:", message)
+        socket.send(b"World")
+    else:
+        socket.send(b"Error token")
