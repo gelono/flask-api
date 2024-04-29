@@ -30,7 +30,7 @@ while True:
     # Проверяем IP адрес клиента
     # if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
     logging.info(f"IP: {client_address[0]}")
-    if client_address[0] == '46.211.229.139':  # Пример проверки IP адреса
+    if client_address[0] == '46.211.226.229':  # Пример проверки IP адреса
         data = client_socket.recv(1024)
         if data:
             msg_client = data.decode()
