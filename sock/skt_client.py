@@ -12,7 +12,7 @@ try:
     client_socket.connect(server_address)
 
     # Отправляем данные на сервер
-    message = "uaysdgfuqcyk13rkuahcvuy311513"
+    message = "uaysdgfuqcyk13rkuahcvuy3115135"
 
     client_socket.sendall(message.encode())
 
@@ -22,11 +22,10 @@ try:
             data = client_socket.recv(1024)
             if not data:
                 break
+            print("Получено от сервера:", data.decode())
         except Exception as e:
             pass
 
-        print("Получено от сервера:", data.decode())
-
 finally:
-    # Закрываем соединени
+    # Закрываем соединение
     client_socket.close()
