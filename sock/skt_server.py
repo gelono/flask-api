@@ -21,7 +21,7 @@ while True:
 
     # Выводим информацию о клиенте
     # print("Подключение от клиента:", client_address)
-    print(codecs.encode(client_address[0], 'utf-8').decode())
+    # print(codecs.encode(client_address[0], 'utf-8').decode())
     # ip_address, port_number = client_address
     # print(f"Подключение от клиента: {ip_address}:{port_number}")
 
