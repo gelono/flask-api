@@ -62,15 +62,15 @@ socket = context.socket(zmq.REP)
 socket.bind("tcp://*:%s" % port)
 
 # Настройка TLS/SSL
-context_ssl = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
-                            keyfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
+# context_ssl = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+# context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pem',
+#                             keyfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-key.pem')
 
 while True:
     message = socket.recv()
 
     # Получаем информацию о сокете
-    client_address = socket.getsockopt(zmq.LAST_ENDPOINT)
+    client_address = socket.getsockopt_string(zmq.LAST_ENDPOINT)
     client_ip = client_address.split(":")[1]
 
     token = message.decode('utf-8')
