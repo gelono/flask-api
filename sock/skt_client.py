@@ -21,5 +21,5 @@ try:
     print("Получено от сервера:", data.decode())
 
 finally:
-    # Закрываем соединение
+    # Закрываем соединени
     client_socket.close()
