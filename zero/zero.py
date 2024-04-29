@@ -68,9 +68,11 @@ context_ssl.load_cert_chain(certfile=r'C:\wacs\crt\vm5043127.43ssd.had.wf-crt.pe
 
 while True:
     message = socket.recv()
+    token = message.decode('utf-8')
+
     logging.info(f"Received request: {message}")
 
-    if check_token(message):
+    if check_token(token):
         print("Received request:", message)
         socket.send(b"World")
     else:
