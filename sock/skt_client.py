@@ -12,13 +12,20 @@ try:
     client_socket.connect(server_address)
 
     # Отправляем данные на сервер
-    message = "uaysdgfuqcyk13rkuahcvuy3115135"
+    message = "uaysdgfuqcyk13rkuahcvuy311513"
 
     client_socket.sendall(message.encode())
 
     # Ждем ответа от сервера
-    data = client_socket.recv(1024)
-    print("Получено от сервера:", data.decode())
+    while True:
+        try:
+            data = client_socket.recv(1024)
+            if not data:
+                break
+        except Exception as e:
+            pass
+
+        print("Получено от сервера:", data.decode())
 
 finally:
     # Закрываем соединени
