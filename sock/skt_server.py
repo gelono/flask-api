@@ -19,7 +19,7 @@ while True:
     client_socket, client_address = server_socket.accept()
 
     # Выводим информацию о клиенте
-    print(f"Подключение от клиента: {client_address}")
+    print("Подключение от клиента:", client_address)
 
     # Проверяем IP адрес клиента
     if client_address[0] == '77.120.144.152':  # Пример проверки IP адреса
@@ -32,7 +32,7 @@ while True:
     # Принимаем данные от клиента и отправляем ответ
     data = client_socket.recv(1024)
     if data:
-        print(f"Получено от клиента: {data.decode()}")
+        print("Получено от клиента:", data.decode())
         client_socket.sendall(b"Msg recived")
 
     # Закрываем соединение с клиентом
