@@ -21,7 +21,7 @@ eth-utils
 eth_abi
 Flask==3.0.3
 frozenlist==1.4.1
-hexbytes==0.3.1
+hexbytes
 hyperliquid-python-sdk
 idna==3.7
 itsdangerous==2.2.0
