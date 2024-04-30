@@ -13,7 +13,12 @@ try:
 
     # Отправляем данные на сервер
     # message = "uaysdgfuqcyk13rkuahcvuy3115135"
-    message = {"token": "uaysdgfuqcyk13rkuahcvuy3115135"}
+    message = {
+        "token": "uaysdgfuqcyk13rkuahcvuy3115135",
+        "command": 4,
+        "amount": 3,
+        "recipient": None,
+    }
 
     # client_socket.sendall(message.encode())
     client_socket.sendall(str(message).encode())

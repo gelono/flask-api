@@ -28,7 +28,7 @@ class Web3WalletManager:
         balance = usdc_contract.functions.balanceOf(self.main_wallet_address).call()
         return self.web3.from_wei(balance, 'gwei') * 1000
 
-    def send_usdc_to_hl(self, amount):
+    def send_usdc_to_hl(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
 
         main_wallet_address_checksum = self.web3.to_checksum_address(self.main_wallet_address)
@@ -42,7 +42,7 @@ class Web3WalletManager:
         }
 
         usdc_decimals = usdc_contract.functions.decimals().call()
-        usdc_amount = amount * 10 ** usdc_decimals
+        usdc_amount = kwargs.get('amount') * 10 ** usdc_decimals
 
         transaction = usdc_contract.functions.transfer(
             whitelist_address_checksum, usdc_amount
@@ -53,15 +53,15 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            print(f"Успешно отправлено {amount} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
+            print(f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
         else:
             print(f"Ошибка при отправке USDC: {receipt['status']}")
 
-    def send_usdc_to_another_wallet(self, recipient, amount):
+    def send_usdc_to_another_wallet(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
 
         main_wallet_address_checksum = self.web3.to_checksum_address(self.main_wallet_address)
-        whitelist_address_checksum = self.web3.to_checksum_address(recipient)
+        whitelist_address_checksum = self.web3.to_checksum_address(kwargs.get('recipient'))
 
         dict_transaction = {
             'chainId': self.web3.eth.chain_id,
@@ -71,7 +71,7 @@ class Web3WalletManager:
         }
 
         usdc_decimals = usdc_contract.functions.decimals().call()
-        usdc_amount = amount * 10 ** usdc_decimals
+        usdc_amount = kwargs.get('amount') * 10 ** usdc_decimals
 
         transaction = usdc_contract.functions.transfer(
             whitelist_address_checksum, usdc_amount
@@ -82,11 +82,11 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            print(f"Успешно отправлено {amount} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
+            print(f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
         else:
             print(f"Ошибка при отправке USDC: {receipt['status']}")
 
-    def hl_withdraw_test(self, amount):
+    def hl_withdraw_test(self, *args, **kwargs):
         address, info, exchange = example_utils.setup(base_url=constants.MAINNET_API_URL, skip_ws=True)
         hl_data = self.get_hyperliquid_user_state()
         hl_acc_value = hl_data['crossMarginSummary']['accountValue']
@@ -97,14 +97,14 @@ class Web3WalletManager:
         # print(f"hl_data {json.dumps(hl_data, indent=4)}")
         print(
             f"address {address} hl_acc_value {hl_acc_value} | hl_total_raw_usd {hl_total_raw_usd} | hl_withdrawable {hl_withdrawable} |"
-            f"Withrdaw Request: {amount}")
+            f"Withrdaw Request: {kwargs.get('amount')}")
 
         # withdraw
         if exchange.account_address != exchange.wallet.address:
             raise Exception(f"Agents do not have permission to perform withdrawals \n"
                             f"Acc {exchange.account_address} | Wallet {exchange.wallet.address}")
 
-        withdraw_result = exchange.withdraw_from_bridge(amount, address)
+        withdraw_result = exchange.withdraw_from_bridge(kwargs.get('amount'), address)
         print(f"withdraw_result {withdraw_result}")
         withdraw_status = withdraw_result['status']
 
