@@ -1,6 +1,7 @@
 import logging
 import socket
 
+from functional import Web3WalletManager
 from tools import check_ip, check_token
 
 logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -19,6 +20,15 @@ server_socket.listen(1)
 
 print("server start...")
 
+obj = Web3WalletManager("options.json")
+commands = {
+    1: obj.get_usdc_balance,
+    2: obj.get_hyperliquid_user_state,
+    3: obj.send_usdc_to_another_wallet,
+    4: obj.send_usdc_to_hl,
+    5: obj.hl_withdraw_test,
+}
+
 while True:
     client_socket, client_address = server_socket.accept()
     logging.info(f"IP: {client_address[0]}")
@@ -35,6 +45,11 @@ while True:
                 print(token)
                 if check_token(token):
                     client_socket.sendall(b"token is correct")
+                    command = message.get("command")
+                    amount = message.get("amount")
+                    recipient = message.get("recipient")
+                    commands[command]()
+
                 else:
                     client_socket.sendall(b"token is incorrect")
             except Exception as e:
