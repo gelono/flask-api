@@ -20,7 +20,7 @@ server_socket.listen(1)
 
 print("server start...")
 
-obj = Web3WalletManager("options.json")
+obj = Web3WalletManager("sock/options.json")
 commands = {
     1: obj.get_usdc_balance,
     2: obj.get_hyperliquid_user_balance,
