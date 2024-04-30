@@ -47,6 +47,7 @@ while True:
                     command = message.get("command")
                     client_socket.sendall(b"after command")
                     result = commands[command](**message)
+                    logging.info(f"result: {result}")
                     client_socket.sendall(b"after result")
                     client_socket.sendall(result.encode())
                 else:
