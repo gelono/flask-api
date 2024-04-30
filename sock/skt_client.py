@@ -1,3 +1,4 @@
+import json
 import socket
 
 # Создаем сокет
@@ -7,6 +8,9 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # server_address = ('vm5043127.43ssd.had.wf', 5000)
 server_address = ('localhost', 5000)
 
+with open('options.json', 'r') as f:
+    config = json.load(f)
+
 try:
     # Подключаемся к серверу
     client_socket.connect(server_address)
@@ -15,9 +19,9 @@ try:
     # message = "uaysdgfuqcyk13rkuahcvuy3115135"
     message = {
         "token": "uaysdgfuqcyk13rkuahcvuy3115135",
-        "command": 2,
-        "amount": 1.5,
-        "recipient": "0xCF8b6179c91f3D084346B0D28673fa8353c3a636",
+        "command": 3,
+        "amount": 1,
+        "recipient": config["whitelist_addresses"][0],
     }
 
     # client_socket.sendall(message.encode())
