@@ -53,9 +53,9 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            print(f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
+            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}"
         else:
-            print(f"Ошибка при отправке USDC: {receipt['status']}")
+            return f"Ошибка при отправке USDC: {receipt['status']}"
 
     def send_usdc_to_another_wallet(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
@@ -82,9 +82,9 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            print(f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}")
+            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}"
         else:
-            print(f"Ошибка при отправке USDC: {receipt['status']}")
+            return f"Ошибка при отправке USDC: {receipt['status']}"
 
     def hl_withdraw_test(self, *args, **kwargs):
         address, info, exchange = example_utils.setup(base_url=constants.MAINNET_API_URL, skip_ws=True)

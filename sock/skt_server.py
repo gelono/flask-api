@@ -46,10 +46,8 @@ while True:
                 if check_token(token):
                     client_socket.sendall(b"token is correct")
                     command = message.get("command")
-                    # amount = message.get("amount")
-                    # recipient = message.get("recipient")
-                    commands[command](**message)
-
+                    result = commands[command](**message)
+                    client_socket.sendall(result.encode())
                 else:
                     client_socket.sendall(b"token is incorrect")
             except Exception as e:
