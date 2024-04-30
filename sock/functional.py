@@ -27,7 +27,7 @@ class Web3WalletManager:
     def get_usdc_balance(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
         balance = usdc_contract.functions.balanceOf(self.main_wallet_address).call()
-        return self.web3.from_wei(balance, 'gwei') * 1000
+        return str(self.web3.from_wei(balance, 'gwei') * 1000)
 
     def send_usdc_to_hl(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
