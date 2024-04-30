@@ -19,9 +19,9 @@ try:
     # message = "uaysdgfuqcyk13rkuahcvuy3115135"
     message = {
         "token": "uaysdgfuqcyk13rkuahcvuy3115135",
-        "command": 3,
+        "command": 1,
         "amount": 1,
-        "recipient": config["whitelist_addresses"][0],
+        "recipient": 1,
     }
 
     # client_socket.sendall(message.encode())

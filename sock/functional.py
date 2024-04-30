@@ -65,7 +65,9 @@ class Web3WalletManager:
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
 
         main_wallet_address_checksum = self.web3.to_checksum_address(self.main_wallet_address)
-        whitelist_address_checksum = self.web3.to_checksum_address(kwargs.get('recipient'))
+
+        white_list_wallet = self.config.get("whitelist_addresses").get(str(kwargs.get('recipient')))
+        whitelist_address_checksum = self.web3.to_checksum_address(white_list_wallet)
 
         dict_transaction = {
             'chainId': self.web3.eth.chain_id,
