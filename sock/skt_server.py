@@ -45,7 +45,9 @@ while True:
                 if check_token(token):
                     client_socket.sendall(b"token is correct")
                     command = message.get("command")
+                    client_socket.sendall(b"after command")
                     result = commands[command](**message)
+                    client_socket.sendall(b"after result")
                     client_socket.sendall(result.encode())
                 else:
                     client_socket.sendall(b"token is incorrect")
