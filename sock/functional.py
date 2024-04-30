@@ -86,7 +86,7 @@ class Web3WalletManager:
         else:
             print(f"Ошибка при отправке USDC: {receipt['status']}")
 
-    def hl_withdraw_test(self, usdc_amount):
+    def hl_withdraw_test(self, amount):
         address, info, exchange = example_utils.setup(base_url=constants.MAINNET_API_URL, skip_ws=True)
         hl_data = self.get_hyperliquid_user_state()
         hl_acc_value = hl_data['crossMarginSummary']['accountValue']
@@ -97,14 +97,14 @@ class Web3WalletManager:
         # print(f"hl_data {json.dumps(hl_data, indent=4)}")
         print(
             f"address {address} hl_acc_value {hl_acc_value} | hl_total_raw_usd {hl_total_raw_usd} | hl_withdrawable {hl_withdrawable} |"
-            f"Withrdaw Request: {usdc_amount}")
+            f"Withrdaw Request: {amount}")
 
         # withdraw
         if exchange.account_address != exchange.wallet.address:
             raise Exception(f"Agents do not have permission to perform withdrawals \n"
                             f"Acc {exchange.account_address} | Wallet {exchange.wallet.address}")
 
-        withdraw_result = exchange.withdraw_from_bridge(usdc_amount, address)
+        withdraw_result = exchange.withdraw_from_bridge(amount, address)
         print(f"withdraw_result {withdraw_result}")
         withdraw_status = withdraw_result['status']
 

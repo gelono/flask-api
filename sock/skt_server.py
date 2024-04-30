@@ -28,12 +28,18 @@ while True:
 
         data = client_socket.recv(1024)
         if data:
-            token = data.decode()
-            logging.info(f"token: {token}")
-            if check_token(token):
-                client_socket.sendall(b"token is correct")
-            else:
-                client_socket.sendall(b"token is incorrect")
+            try:
+                message = eval(data.decode())  # Преобразовываем данные в словарь
+                token = message.get("token")  # Извлекаем токен из словаря
+                logging.info(f"token: {token}")
+                print(token)
+                if check_token(token):
+                    client_socket.sendall(b"token is correct")
+                else:
+                    client_socket.sendall(b"token is incorrect")
+            except Exception as e:
+                logging.error(f"Error: {e}")
+                client_socket.sendall(b"Invalid message format")
         else:
             client_socket.sendall(b"No token received")
 
