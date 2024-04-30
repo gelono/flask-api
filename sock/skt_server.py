@@ -23,7 +23,7 @@ print("server start...")
 obj = Web3WalletManager("options.json")
 commands = {
     1: obj.get_usdc_balance,
-    2: obj.get_hyperliquid_user_state,
+    2: obj.get_hyperliquid_user_balance,
     3: obj.send_usdc_to_another_wallet,
     4: obj.send_usdc_to_hl,
     5: obj.hl_withdraw_test,

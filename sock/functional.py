@@ -21,8 +21,12 @@ class Web3WalletManager:
     def get_hyperliquid_user_state(self, *args, **kwargs):
         info = Info(constants.MAINNET_API_URL, skip_ws=True)
         user_state = info.user_state(self.main_wallet_address)
-        # return user_state['crossMarginSummary']['accountValue']
         return user_state
+
+    def get_hyperliquid_user_balance(self, *args, **kwargs):
+        info = Info(constants.MAINNET_API_URL, skip_ws=True)
+        user_state = info.user_state(self.main_wallet_address)
+        return user_state['crossMarginSummary']['accountValue']
 
     def get_usdc_balance(self, *args, **kwargs):
         usdc_contract = self.web3.eth.contract(address=USDC_CONTRACT_ADDRESS, abi=ERC20_ABI)
