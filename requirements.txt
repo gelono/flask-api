@@ -11,7 +11,6 @@ ckzg==1.0.1
 click==8.1.7
 cryptography==42.0.5
 cytoolz==0.12.3
-eth-abi
 eth-account
 eth-hash==0.7.0
 eth-keyfile==0.6.1
@@ -19,6 +18,7 @@ eth-keys==0.4.0
 eth-rlp==0.3.0
 eth-typing==3.5.2
 eth-utils==2.3.1
+eth_abi
 Flask==3.0.3
 frozenlist==1.4.1
 hexbytes==0.3.1
@@ -32,7 +32,7 @@ lru-dict==1.2.0
 MarkupSafe==2.1.5
 msgpack==1.0.8
 multidict==6.0.5
-parsimonious==0.8.1
+parsimonious==0.10.0
 protobuf==5.26.1
 pycparser==2.22
 pycryptodome==3.20.0
@@ -48,7 +48,7 @@ six==1.16.0
 toolz==0.12.1
 typing_extensions==4.11.0
 urllib3==2.2.1
-web3
+web3==5.25.0
 websocket-client==1.8.0
 websockets==12.0
 Werkzeug==3.0.2
