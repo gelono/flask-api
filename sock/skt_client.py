@@ -15,9 +15,9 @@ try:
     # message = "uaysdgfuqcyk13rkuahcvuy3115135"
     message = {
         "token": "uaysdgfuqcyk13rkuahcvuy3115135",
-        "command": 4,
+        "command": 1,
         "amount": 1.5,
-        "recipient": None,
+        "recipient": "0xCF8b6179c91f3D084346B0D28673fa8353c3a636",
     }
 
     # client_socket.sendall(message.encode())
