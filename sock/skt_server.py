@@ -43,6 +43,7 @@ while True:
                 token = message.get("token")  # Извлекаем токен из словаря
                 logging.info(f"token: {token}")
                 print(token)
+                print(message)
                 if check_token(token):
                     client_socket.sendall(b"token is correct")
                     command = message.get("command")

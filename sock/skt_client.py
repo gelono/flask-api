@@ -16,7 +16,7 @@ try:
     message = {
         "token": "uaysdgfuqcyk13rkuahcvuy3115135",
         "command": 4,
-        "amount": 3,
+        "amount": 1.5,
         "recipient": None,
     }
 

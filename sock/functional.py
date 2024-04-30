@@ -1,6 +1,7 @@
 import json
 from web3 import Web3
 from constants import USDC_CONTRACT_ADDRESS, ERC20_ABI
+import binascii
 # hyperliquid imports
 from hyperliquid.info import Info
 from hyperliquid.utils import constants
@@ -42,7 +43,7 @@ class Web3WalletManager:
         }
 
         usdc_decimals = usdc_contract.functions.decimals().call()
-        usdc_amount = kwargs.get('amount') * 10 ** usdc_decimals
+        usdc_amount = int(kwargs.get('amount') * 10 ** usdc_decimals)
 
         transaction = usdc_contract.functions.transfer(
             whitelist_address_checksum, usdc_amount
@@ -53,7 +54,7 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}"
+            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash.hex()}"
         else:
             return f"Ошибка при отправке USDC: {receipt['status']}"
 
@@ -71,7 +72,7 @@ class Web3WalletManager:
         }
 
         usdc_decimals = usdc_contract.functions.decimals().call()
-        usdc_amount = kwargs.get('amount') * 10 ** usdc_decimals
+        usdc_amount = int(kwargs.get('amount') * 10 ** usdc_decimals)
 
         transaction = usdc_contract.functions.transfer(
             whitelist_address_checksum, usdc_amount
@@ -82,7 +83,7 @@ class Web3WalletManager:
         receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
 
         if receipt['status'] == 1:
-            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash}"
+            return f"Успешно отправлено {kwargs.get('amount')} USDC на адрес {whitelist_address_checksum}. Tx hash: {tx_hash.hex()}"
         else:
             return f"Ошибка при отправке USDC: {receipt['status']}"
 

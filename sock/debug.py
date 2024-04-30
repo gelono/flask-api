@@ -101,6 +101,6 @@ async def hl_withdraw_test(usdc_amount):
 
 # send_usdc_to_whitelist("0x2df1c51e09aecf9cacb7bc98cb1742757f163df7", 1)
 obj = Web3WalletManager("options.json")
-# obj.send_usdc_to_hl(1)
+obj.send_usdc_to_hl(amount=1.5)
 # print(obj.get_hyperliquid_user_state())
-obj.hl_withdraw_test(20)
+# obj.hl_withdraw_test(20)
