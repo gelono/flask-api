@@ -1,7 +1,6 @@
 import eth_account
 from eth_account.signers.local import LocalAccount
 import json
-import os
 
 from hyperliquid.exchange import Exchange
 from hyperliquid.info import Info
@@ -9,7 +8,7 @@ from hyperliquid.info import Info
 
 def setup(base_url=None, skip_ws=False):
     # config_path = os.path.join(os.path.dirname(__file__), "config.json")
-    config_path = "/home/oleg/PycharmProjects/flask-api/sock/config .json"
+    config_path = "config.json"
     with open(config_path) as f:
         config = json.load(f)
     account: LocalAccount = eth_account.Account.from_key(config["secret_key"])
