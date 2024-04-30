@@ -51,7 +51,7 @@ while True:
                     client_socket.sendall(b"token is incorrect")
             except Exception as e:
                 logging.error(f"Error: {e}")
-                client_socket.sendall(b"Invalid message format")
+                client_socket.sendall(str(e).encode())
         else:
             client_socket.sendall(b"No token received")
 
