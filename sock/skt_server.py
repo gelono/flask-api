@@ -4,7 +4,7 @@ import socket
 from functional import Web3WalletManager
 from tools import check_ip, check_token
 
-logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename='sock/server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Создаем сокет
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
