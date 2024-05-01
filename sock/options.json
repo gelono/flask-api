@@ -1,14 +1,14 @@
 {
   "main_wallet": {
-    "public_key": "0x2D3b14e79fB9263b7B44Aa6d985f8334351ed3AF",
-    "private_key": "a1d88f2749e2e3e0688623df56c22fdd0d11d6a0c4a74cbd940696fb886f5dfe"
+    "public_key": "your_public_key",
+    "private_key": "your_private_key"
   },
   "exchange_addresses": {
-    "HL": "0x2df1c51e09aecf9cacb7bc98cb1742757f163df7",
+    "HL": "HL_exchange_address",
     "CEX": "CEX_exchange_address"
   },
   "whitelist_addresses": {
-    "1":"0xCF8b6179c91f3D084346B0D28673fa8353c3a636",
+    "1":"whitelisted_address_1",
     "2":"whitelisted_address_2",
     "3":"whitelisted_address_3"
   }

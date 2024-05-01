@@ -1,4 +1,4 @@
 {
-    "secret_key": "a1d88f2749e2e3e0688623df56c22fdd0d11d6a0c4a74cbd940696fb886f5dfe",
-    "account_address": "0x2D3b14e79fB9263b7B44Aa6d985f8334351ed3AF"
+    "secret_key": "your_private_key_wallet",
+    "account_address": "your_public_key_wallet"
 }
