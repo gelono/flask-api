@@ -8,11 +8,13 @@ from hyperliquid.info import Info
 
 def setup(base_url=None, skip_ws=False):
     # config_path = os.path.join(os.path.dirname(__file__), "config.json")
-    config_path = "sock/config.json"
+    config_path = "sock/options.json"
     with open(config_path) as f:
         config = json.load(f)
-    account: LocalAccount = eth_account.Account.from_key(config["secret_key"])
-    address = config["account_address"]
+    # account: LocalAccount = eth_account.Account.from_key(config["secret_key"])
+    account: LocalAccount = eth_account.Account.from_key(config.get("main_wallet").get("private_key"))
+    # address = config["account_address"]
+    address = config.get("main_wallet").get("public_key")
     if address == "":
         address = account.address
     print("Running with account address:", address)

@@ -4,12 +4,7 @@
     "private_key": "your_private_key"
   },
   "exchange_addresses": {
-    "HL": "HL_exchange_address",
+    "HL": "0x2Df1c51E09aECF9cacB7bc98cB1742757f163dF7",
     "CEX": "CEX_exchange_address"
-  },
-  "whitelist_addresses": {
-    "1":"whitelisted_address_1",
-    "2":"whitelisted_address_2",
-    "3":"whitelisted_address_3"
   }
 }

@@ -66,8 +66,9 @@ class Web3WalletManager:
 
         main_wallet_address_checksum = self.web3.to_checksum_address(self.main_wallet_address)
 
-        white_list_wallet = self.config.get("whitelist_addresses").get(str(kwargs.get('recipient')))
-        whitelist_address_checksum = self.web3.to_checksum_address(white_list_wallet)
+        # white_list_wallet = self.config.get("whitelist_addresses").get(str(kwargs.get('recipient')))
+        cex_wallet = self.config.get("exchange_addresses").get(kwargs.get('CEX'))
+        whitelist_address_checksum = self.web3.to_checksum_address(cex_wallet)
 
         dict_transaction = {
             'chainId': self.web3.eth.chain_id,

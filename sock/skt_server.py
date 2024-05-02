@@ -4,13 +4,13 @@ import socket
 from functional import Web3WalletManager
 from tools import check_ip, check_token
 
-logging.basicConfig(filename='sock/server.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename="sock/server.log", level=logging.INFO, format="%(asctime)s - %(message)s")
 
 # Создаем сокет
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Указываем IP и порт для прослушивания
-server_address = ('', 5000)  # пустая строка означает прослушивание всех доступных интерфейсов
+server_address = ("", 5000)  # пустая строка означает прослушивание всех доступных интерфейсов
 
 # Привязываем сокет к заданному адресу и порту
 server_socket.bind(server_address)
