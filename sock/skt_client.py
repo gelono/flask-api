@@ -16,12 +16,10 @@ try:
     client_socket.connect(server_address)
 
     # Отправляем данные на сервер
-    # message = "uaysdgfuqcyk13rkuahcvuy3115135"
     message = {
-        "token": "uaysdgfuqcyk13rkuahcvuy3115135",
-        "command": 2,
+        "token": "authorization_token",
+        "command": 3,
         "amount": 1,
-        # "recipient": 1,
     }
 
     # client_socket.sendall(message.encode())
